@@ -1,0 +1,7 @@
+{
+  "versionCode": 6,
+  "versionName": "1.0.5",
+  "apkUrl": "https://github.com/28725535856/underwater-sensor-updates/releases/download/v1.0.5/underwater-sensor-1.0.5.apk",
+  "sha256": "17d2d32d282b1f0db4ce9b546160266c10f02e805d0311a7d7ded601490ee59b",
+  "notes": "读取成功后自动显示最新电阻；取消曲线选中后保留数值；明确提示 ADC 满量程及 60 kΩ 显示上限。"
+}
