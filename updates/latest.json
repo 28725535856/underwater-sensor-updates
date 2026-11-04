@@ -1,17 +1,17 @@
 {
-  "versionCode": 8,
-  "versionName": "1.0.7",
-  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.7.apk",
-  "apkBytes": 5218566,
-  "sha256": "0ef889da5b7e12e57f1671d98fc4ead7ee6c785021d709cdf4ecaba66e9154d9",
-  "notes": "实时通道诊断版：连接诊断中新增保持连接测试。只发送现有启动指令，确认后监听60秒；有效主动数据帧可显示，重复帧单独统计。未确认硬件停止指令。保留普通检测、读取和Excel导出。从1.0.6可优先下载约225KB差异包，需完成系统安装确认。",
+  "versionCode": 9,
+  "versionName": "1.0.8",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.8.apk",
+  "apkBytes": 5222664,
+  "sha256": "c3917059ff8f84694124782dfc587b3d01121481fd5823fb0e9b9ab1b0217015",
+  "notes": "GATT读取通道诊断版：连接诊断→实时通道测试→GATT直接读取（30秒）。只发送一次原有启动指令，确认后串行标准读取FFE1，不发送3032。分别记录空值、启动确认、原始值变化及可识别完整数据帧；尚未确认实时采集和硬件停止能力。从1.0.7可优先使用约272KB差异包。",
   "deltas": [
     {
-      "fromVersionCode": 7,
-      "baseSha256": "5e4d34875af80b9582399674e0dd33eb506a6580de9282197252f27343472ddb",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.6-to-1.0.7.sud.gz",
-      "bytes": 225220,
-      "sha256": "72f49142e900d344d1050fcadbc07ed2d637fae1536db354d10af4bae5259af2"
+      "fromVersionCode": 8,
+      "baseSha256": "0ef889da5b7e12e57f1671d98fc4ead7ee6c785021d709cdf4ecaba66e9154d9",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.7-to-1.0.8.sud.gz",
+      "bytes": 272259,
+      "sha256": "f27a379353012385e7158f21dd6fd042b5023aea3ffbc0f0fc8b9aa8946827f5"
     }
   ]
 }
