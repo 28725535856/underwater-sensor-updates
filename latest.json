@@ -1,17 +1,17 @@
 {
-  "versionCode": 10,
-  "versionName": "1.0.9",
-  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.9.apk",
+  "versionCode": 11,
+  "versionName": "1.0.10",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.10.apk",
   "apkBytes": 5234945,
-  "sha256": "1eee1aa777fbf2339547bab256a34ea349391b7401c9e9628fd40dd1b764f833",
-  "notes": "自动电阻监测：点击开始检测后自动执行短时采集与读取，当前电阻和曲线随新返回数据更新，按钮变为红色停止检测。停止后查看本次已保存记录并导出全部Excel。各段之间有通信间隙，曲线分段显示，未宣称无间断采样。采集中保持App前台。从1.0.8可优先使用约282KB差异包。",
+  "sha256": "cb0700924f9c7d52747b0b53ad8e13db709a1ce95a05c35ecc4961db1d04666b",
+  "notes": "软件电阻显示上限由60kΩ提高至1.2MΩ，正常ADC可显示约70kΩ等高阻值。ADC=255标为超量程，Excel和复制记录保留原始ADC并明确标识，不能据此恢复已饱和的真实电阻。自动短测流程保持，段间有间隙。79项关联测试及签名、差异还原校验通过。从1.0.9可优先使用约281KB差异包。",
   "deltas": [
     {
-      "fromVersionCode": 9,
-      "baseSha256": "c3917059ff8f84694124782dfc587b3d01121481fd5823fb0e9b9ab1b0217015",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.8-to-1.0.9.sud.gz",
-      "bytes": 281573,
-      "sha256": "f12ecc92faa6d902d4aa2eee9bb34eefed479349fa4f141b3a5de555f06c8ee0"
+      "fromVersionCode": 10,
+      "baseSha256": "1eee1aa777fbf2339547bab256a34ea349391b7401c9e9628fd40dd1b764f833",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.9-to-1.0.10.sud.gz",
+      "bytes": 281443,
+      "sha256": "e36adf2ece83a091699d8933fabb9299f6708c1831bb726899f2c6b15a248254"
     }
   ]
 }
