@@ -7,7 +7,7 @@
 固定更新清单地址：
 
 ```text
-https://github.com/28725535856/underwater-sensor-updates/releases/latest/download/latest.json
+https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/updates/latest.json
 ```
 
 在 App 的“检查更新”中保存此地址，点击“保存并检查”，有新版本时确认下载和安装。首次按系统提示允许本应用安装更新。已经安装此前测试版时无需先卸载。
@@ -28,7 +28,7 @@ https://github.com/28725535856/underwater-sensor-updates/releases/latest/downloa
 
 ## 后续发布约定
 
-新版本保持原包名和同一签名，增加 versionCode。创建对应 Release，附加已签名 APK 和名为 latest.json 的清单，并将其设为 Latest。清单应指向该版本的固定 APK 下载地址，填写 APK 实际 SHA-256；同时更新仓库根目录的清单副本。App 的固定清单地址无需修改。
+新版本保持原包名和同一签名，增加 versionCode。创建对应 Release，附加已签名 APK 和名为 latest.json 的清单，并将其设为 Latest。将同一签名 APK 的直连副本写入 packages 下的版本化路径，清单填写其实际 SHA-256；同步更新 updates/latest.json 和仓库根目录 latest.json。App 的固定直连清单地址无需修改。
 
 .github/workflows/publish-1.0.6.yml 记录本次迁移发布步骤：下载已签名包、核对 SHA-256 与字节数、发布 Release 附件。它仅针对 1.0.6，不会构建客户端或修改签名。不需要将账户密码、长期访问密钥或签名私钥加入仓库。
 
@@ -37,3 +37,9 @@ https://github.com/28725535856/underwater-sensor-updates/releases/latest/downloa
 首次升级至 1.0.6 仍需完整 APK。后续发布方可在清单的 `deltas` 中提供匹配已安装版本与原包 SHA-256 的 SUD1 gzip 差异包，客户端重建后仍核对完整 APK 摘要、版本、包名和同一签名。不匹配或失败时回退完整包，不会静默安装。
 
 本次使用真实 1.0.5 / 1.0.6 签名 APK 的本地重建验证：差异包 265,547 字节，完整包 5,218,566 字节（约 5.09%），结果逐字节一致。这是重建测试，不表示旧客户端可以使用差异包，也不是手机 1 秒下载的实测结果。16 项差异重建边界与取消测试通过。当前清单暂不提供可用差异包，待后续版本从 1.0.6 基础生成。
+
+## 直连下载路径
+
+用户手机反馈 Release 清单跳转可能超时，因此当前推荐上方 raw.githubusercontent.com 专用清单地址。该清单与 APK 都是同一仓库的直接文件响应，减少网页及附件跳转。APK 直连副本已逐字节校验 SHA-256。原 Release 附件仍作为版本归档。
+
+用户已确认该直连域名的清单能快速打开。手机安装仍应以 App 弹窗的“当前版本”为准；下载完成后还需要确认系统安装。工作环境中的下载耗时不能作为手机耗时保证。
