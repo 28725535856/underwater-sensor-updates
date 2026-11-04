@@ -1,0 +1,55 @@
+name: Publish sensor 1.0.6
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-1.0.6.yml'
+permissions:
+  contents: write
+concurrency:
+  group: publish-sensor-1.0.6
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify signed APK; publish update assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_dir="$RUNNER_TEMP/sensor-release-1.0.6"
+          mkdir -p "$release_dir"
+          cd "$release_dir"
+          curl --fail --location --silent --show-error --proto '=https' --proto-redir '=https' --connect-timeout 15 --max-time 180 --retry 2 \
+            'https://underwater-sensor-updates-20261104.z2656953367.chatgpt.site/releases/underwater-sensor-1.0.6.apk' \
+            --output underwater-sensor-1.0.6.apk
+          printf '%s  %s\n' '5e4d34875af80b9582399674e0dd33eb506a6580de9282197252f27343472ddb' 'underwater-sensor-1.0.6.apk' | sha256sum --check --strict
+          test "$(stat --format=%s underwater-sensor-1.0.6.apk)" = 5218566
+          cat > latest.json <<'MANIFEST'
+          {
+            "versionCode": 7,
+            "versionName": "1.0.6",
+            "apkUrl": "https://github.com/28725535856/underwater-sensor-updates/releases/download/v1.0.6/underwater-sensor-1.0.6.apk",
+            "apkBytes": 5218566,
+            "sha256": "5e4d34875af80b9582399674e0dd33eb506a6580de9282197252f27343472ddb",
+            "notes": "恢复待读取时的坐标轴；保留电阻显示和满量程提示；新增下载速度显示与后续差异更新支持。本次需完整更新一次，之后的小版本可使用发布方提供的差异包。",
+            "deltas": []
+          }
+          MANIFEST
+          cat > release-notes.md <<'NOTES'
+          水下传感器 1.0.6（versionCode 7），Android 6 及以上。
+          恢复待读取坐标轴，支持后续差异更新，显示下载速度。本次升级需完整下载一次。
+          使用与此前测试版相同的签名，可以覆盖更新。
+          SHA-256: 5e4d34875af80b9582399674e0dd33eb506a6580de9282197252f27343472ddb
+          此仓库仅发布已签名安装包和更新信息，不包含客户端源码、签名私钥或测量数据。
+          NOTES
+          if gh release view v1.0.6 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            printf '%s\n' 'Release v1.0.6 already exists; leaving existing assets unchanged.'
+            exit 0
+          fi
+          gh release create v1.0.6 underwater-sensor-1.0.6.apk latest.json \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest \
+            --title '水下传感器 1.0.6' --notes-file release-notes.md
