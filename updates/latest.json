@@ -1,0 +1,9 @@
+{
+  "versionCode": 7,
+  "versionName": "1.0.6",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.6.apk",
+  "apkBytes": 5218566,
+  "sha256": "5e4d34875af80b9582399674e0dd33eb506a6580de9282197252f27343472ddb",
+  "notes": "恢复待读取时的坐标轴；保留电阻显示和满量程提示；新增下载速度显示与后续差异更新支持。本次需完整更新一次，之后的小版本可使用发布方提供的差异包。",
+  "deltas": []
+}
