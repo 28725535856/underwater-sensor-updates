@@ -1,0 +1,53 @@
+name: Publish sensor 1.0.5
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-1.0.5.yml'
+permissions:
+  contents: write
+concurrency:
+  group: publish-sensor-1.0.5
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify signed APK; publish update assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_dir="$RUNNER_TEMP/sensor-release-1.0.5"
+          mkdir -p "$release_dir"
+          cd "$release_dir"
+          curl --fail --location --silent --show-error --proto '=https' --proto-redir '=https' --connect-timeout 15 --max-time 180 --retry 2 \
+            'https://underwater-sensor-updates-20261104.z2656953367.chatgpt.site/releases/underwater-sensor-1.0.5.apk' \
+            --output underwater-sensor-1.0.5.apk
+          printf '%s  %s\n' '17d2d32d282b1f0db4ce9b546160266c10f02e805d0311a7d7ded601490ee59b' 'underwater-sensor-1.0.5.apk' | sha256sum --check --strict
+          test "$(stat --format=%s underwater-sensor-1.0.5.apk)" = 5214465
+          cat > latest.json <<'MANIFEST'
+          {
+            "versionCode": 6,
+            "versionName": "1.0.5",
+            "apkUrl": "https://github.com/28725535856/underwater-sensor-updates/releases/download/v1.0.5/underwater-sensor-1.0.5.apk",
+            "sha256": "17d2d32d282b1f0db4ce9b546160266c10f02e805d0311a7d7ded601490ee59b",
+            "notes": "读取成功后自动显示最新电阻；取消曲线选中后保留数值；明确提示 ADC 满量程及 60 kΩ 显示上限。"
+          }
+          MANIFEST
+          cat > release-notes.md <<'NOTES'
+          水下传感器 1.0.5（versionCode 6），Android 6 及以上。
+          读取成功后自动显示最新电阻；取消选中后保留数值；提示 ADC 满量程和 60 kΩ 显示上限。
+          使用与此前测试版相同的签名，可以覆盖更新。
+          SHA-256: 17d2d32d282b1f0db4ce9b546160266c10f02e805d0311a7d7ded601490ee59b
+          此仓库仅发布已签名安装包和更新信息，不包含客户端源码、签名私钥或测量数据。
+          NOTES
+          if gh release view v1.0.5 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            printf '%s\n' 'Release v1.0.5 already exists; leaving existing assets unchanged.'
+            exit 0
+          fi
+          gh release create v1.0.5 underwater-sensor-1.0.5.apk latest.json \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest \
+            --title '水下传感器 1.0.5' --notes-file release-notes.md
