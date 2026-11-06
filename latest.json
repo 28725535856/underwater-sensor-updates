@@ -1,17 +1,31 @@
 {
-  "versionCode": 15,
-  "versionName": "1.0.14",
-  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.14.apk",
-  "apkBytes": 5234945,
-  "sha256": "2d68fb03e5afb2e3d0fc63e6d4fc443f9934429693e54d32fc7201852bf7f0c0",
-  "notes": "按要求恢复原版业务流程：开始检测仅发送一次3031，数据读取才发送3032；取消主按钮的自动重启采样和批量轮询，读取不再只查看缓存。保留权限兼容、短包/分包越界防护、传感器选择、Excel、120万Ω显示上限及App内更新。不修改采集板固件。",
+  "versionCode": 17,
+  "versionName": "1.1.1",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.1.apk",
+  "apkBytes": 5221345,
+  "sha256": "76a44c37153723d55af3911c710693b68921a9aa18916dc263357fc0f0ad4026",
+  "notes": "无需烧录，恢复自动采集并改为FIFO逐点显示：收到一批真实数据先入队，按原固件约500ms采样间隔逐点刷新数值和曲线。显示缓存点数；队列空时等待，不补点。取消批间额外等待，避免过早读取空包；停止时发送原读取指令并保留记录，导出包含尚未显示的已采集点。保留蓝牙兼容、120万Ω显示和ADC255超量程。此版本是缓存逐点展示，原固件仍分批回传，不能消除采集与传输延迟。",
   "deltas": [
     {
       "fromVersionCode": 14,
       "baseSha256": "47b79ebd5324a1f2df644f3d1b8b5574191c9a6e3074d02eb1af21dbd0d4e49f",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.13-to-1.0.14.sud.gz",
-      "bytes": 275254,
-      "sha256": "7376a3e0ef37c44f4f43b49ff12d78603ade6713b4110b24bd835d1f688c2edd"
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.13-to-1.1.1.sud.gz",
+      "bytes": 280427,
+      "sha256": "d9cecd128356a46b7efaad73147fd9052ced3b050214a7df6734adc5ca71456f"
+    },
+    {
+      "fromVersionCode": 15,
+      "baseSha256": "2d68fb03e5afb2e3d0fc63e6d4fc443f9934429693e54d32fc7201852bf7f0c0",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.14-to-1.1.1.sud.gz",
+      "bytes": 281176,
+      "sha256": "75e554f660ffd958fee50fceade26b076adbb988006f65e1bdde7f68ebea03ea"
+    },
+    {
+      "fromVersionCode": 16,
+      "baseSha256": "f0fad97f9f0343b7a1572dad039bf6e4807712cd59d1195c4b2e17d0d4063ef5",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.0-to-1.1.1.sud.gz",
+      "bytes": 243806,
+      "sha256": "a85756d59ebdec776afc33948f3d05531de21a2ca77f4645c77950598ba00c99"
     }
   ]
 }
