@@ -1,24 +1,17 @@
 {
-  "versionCode": 13,
-  "versionName": "1.0.12",
-  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.12.apk",
+  "versionCode": 14,
+  "versionName": "1.0.13",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.13.apk",
   "apkBytes": 5234945,
-  "sha256": "619aa559ce1ca36f3d3a8ca01ad73eeb52347d88fe6d478f08960afa5d875db2",
-  "notes": "减少刷新停顿：启动确认后等待由1500ms减至250ms，轮间等待由250ms减至50ms，每轮固定等待减少1450ms。保留1.2MΩ上限、ADC255超量程、连续趋势线和原始数据导出。仍采用原板的启动/读取轮询，实际刷新还包含传感器响应时间，须手机实测。",
+  "sha256": "47b79ebd5324a1f2df644f3d1b8b5574191c9a6e3074d02eb1af21dbd0d4e49f",
+  "notes": "修复完整空采样包NUM=0导致自动停止：空包不增加数据，自动延长等待继续采集。初始500ms，空包后1000ms、1500ms适应板端速度，成功后保留已适应等待；连续4轮无样本才停止。损坏或错轮次数据仍报错，已有采样保留。保留120万Ω上限、连续趋势曲线和Excel。",
   "deltas": [
     {
-      "fromVersionCode": 11,
-      "baseSha256": "cb0700924f9c7d52747b0b53ad8e13db709a1ce95a05c35ecc4961db1d04666b",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.10-to-1.0.12.sud.gz",
-      "bytes": 265466,
-      "sha256": "2a9b1c08310424df300c85cdc099b7978ac74e077864445efee10428e45d2c51"
-    },
-    {
-      "fromVersionCode": 12,
-      "baseSha256": "e64bd5882f2bbf064af2ff3183432bf4af006c260f3e33fc47c11611370af67e",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.11-to-1.0.12.sud.gz",
-      "bytes": 253739,
-      "sha256": "692a58f289b7e56a4eff88b0c07c63542687f22aade20e99d9da487b58d01abd"
+      "fromVersionCode": 13,
+      "baseSha256": "619aa559ce1ca36f3d3a8ca01ad73eeb52347d88fe6d478f08960afa5d875db2",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.12-to-1.0.13.sud.gz",
+      "bytes": 265122,
+      "sha256": "d25ac18508017a0aae34565231959937acee9c27b0ab96b4f9de3c411b0d73ce"
     }
   ]
 }
