@@ -1,31 +1,31 @@
 {
-  "versionCode": 18,
-  "versionName": "1.1.2",
-  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.2.apk",
-  "apkBytes": 5221345,
-  "sha256": "7df1fb93c10340d65d6d37e8707752ec500a41e369d6a76bfb59f68165313b89",
-  "notes": "无需烧录。按要求先预缓存约8个真实点，再固定节奏逐点显示；默认650ms/点，启动阶段若测得到包更慢，会在开始显示前确定一次更长间隔，开始后不再自动变速。停止时即使未攒够8点也会释放已收缓存。减少图表重复初始化，保留原始采样时间、ADC、超量程和完整导出。改善显示均匀性，会增加起步及缓存延迟；原板仍分批回传，长时间没数据时仍需等待。",
+  "versionCode": 19,
+  "versionName": "1.1.3",
+  "apkUrl": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.3.apk",
+  "apkBytes": 5225441,
+  "sha256": "f0c9500ca9f60d4afba258814c57457e7549259f60c33586f2d9f848c309bd44",
+  "notes": "无需烧录。预缓存3个真实点后固定650ms逐点显示；全部采样点保留，批量到达时允许缓存超过3点。固定底部状态区高度，避免文字换行带动整页上下跳动；纵轴按档扩展且一次检测中不缩小。新增屏幕当前ADC与最新接收ADC对照诊断。沿用原版4700Ω换算参数，不强制把电阻改成70000Ω。原板仍批量回传，缓存用尽时需等待；手机效果待复测。",
   "deltas": [
+    {
+      "fromVersionCode": 18,
+      "baseSha256": "7df1fb93c10340d65d6d37e8707752ec500a41e369d6a76bfb59f68165313b89",
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.2-to-1.1.3.sud.gz",
+      "bytes": 283361,
+      "sha256": "053712a67e9a5f96b049dad37ad2a953a33e327d8243625fb2df6ef5e7db7345"
+    },
     {
       "fromVersionCode": 17,
       "baseSha256": "76a44c37153723d55af3911c710693b68921a9aa18916dc263357fc0f0ad4026",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.1-to-1.1.2.sud.gz",
-      "bytes": 274752,
-      "sha256": "eb130a31f0b82d7c878b46146ae26d79a2592c4214100e1819ef42694044f196"
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.1-to-1.1.3.sud.gz",
+      "bytes": 283274,
+      "sha256": "61cb9f81f2e3acae953ee26c9599844a70f3d87a85bc15faa6c3bca1d7cf238a"
     },
     {
       "fromVersionCode": 15,
       "baseSha256": "2d68fb03e5afb2e3d0fc63e6d4fc443f9934429693e54d32fc7201852bf7f0c0",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.14-to-1.1.2.sud.gz",
-      "bytes": 281691,
-      "sha256": "99e0812c078c5f7e9f1328ef88c18d95044d1f6d51e86d143323f6ab7f8269ca"
-    },
-    {
-      "fromVersionCode": 16,
-      "baseSha256": "f0fad97f9f0343b7a1572dad039bf6e4807712cd59d1195c4b2e17d0d4063ef5",
-      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.1.0-to-1.1.2.sud.gz",
-      "bytes": 265231,
-      "sha256": "6521b0e3a6eee430014fe16695774403f31d3aeaae56b40584204d35a3374043"
+      "url": "https://raw.githubusercontent.com/28725535856/underwater-sensor-updates/main/packages/underwater-sensor-1.0.14-to-1.1.3.sud.gz",
+      "bytes": 283643,
+      "sha256": "4fe8ce223f199530e84f2a6557dbf92d6566a6791e119113d569fd6718038249"
     }
   ]
 }
