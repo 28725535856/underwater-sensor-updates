@@ -1,0 +1,17 @@
+{
+  "versionCode": 21,
+  "versionName": "1.1.5",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.5.apk",
+  "apkBytes": 5225441,
+  "sha256": "cb3c08ffedecea18a869fb7150c2b99965e77f824b860c7d1a4b94cbab4fa79d",
+  "notes": "无需拆板或烧录。按要求，界面、复制和Excel统一显示阻值：最近1～4个有效ADC取均值后按4700*m/(255-m)换算；采集信息页记录处理方法。超过750ms间隙、超量程会重置窗口，不补造时间点。新增残包1500ms未补齐时有限次重读同一缓存（最多2次），不重启采样。147项测试、签名与实际Java增量还原通过；手机待验证。该处理没有改变8位ADC硬件分辨率。",
+  "deltas": [
+    {
+      "fromVersionCode": 20,
+      "baseSha256": "745ea8bbe7c18a5cbcaeae5641fa9bbfca7dfcd3bee674604da5e36ec3d8952a",
+      "url": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.4-to-1.1.5.sud.gz",
+      "bytes": 285484,
+      "sha256": "760d1ca141b986d9344517485948be64cf393dab60139cf828dd18375a4ef46e"
+    }
+  ]
+}
