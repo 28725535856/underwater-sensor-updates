@@ -1,17 +1,17 @@
 {
-  "versionCode": 22,
-  "versionName": "1.1.6",
-  "apkUrl": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.6.apk",
-  "apkBytes": 5224628,
-  "sha256": "a438a46feb91d194f60ee7d027e12c3fcfe652fd55f6be0dcdf9df22f27c4e72",
-  "notes": "修复残包重读时旧请求状态阻止发出读取指令的问题。重读仅发送 30 32，最多两次。152 项测试通过，签名一致。手机实测待确认。",
+  "versionCode": 23,
+  "versionName": "1.1.7",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.7.apk",
+  "apkBytes": 5228724,
+  "sha256": "2ba879e57b8dee0da73c8aab4a17ae42c8ab143219e08cfd5b064f3522b2ff91",
+  "notes": "启动确认超时或蓝牙连接中断时保留已采数据并自动重连。取消旧版采集点数和段数上限。图表恢复逐点换算及原版圆滑曲线，导出保留实际逐点换算值。153 项测试通过，手机长时间实测待验证。",
   "deltas": [
     {
-      "fromVersionCode": 21,
-      "baseSha256": "cb3c08ffedecea18a869fb7150c2b99965e77f824b860c7d1a4b94cbab4fa79d",
-      "url": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.5-to-1.1.6.sud.gz",
-      "bytes": 303733,
-      "sha256": "2bd5f9e2d94fd384218831892ee6dde85bc9e074cc6f1f7795b748d70b2668c4"
+      "fromVersionCode": 22,
+      "baseSha256": "a438a46feb91d194f60ee7d027e12c3fcfe652fd55f6be0dcdf9df22f27c4e72",
+      "url": "https://cdn.jsdelivr.net/gh/28725535856/underwater-sensor-updates@main/packages/underwater-sensor-1.1.6-to-1.1.7.sud.gz",
+      "bytes": 287865,
+      "sha256": "332f0a525f3d198afb9d2970e86ae97baadad071a9a6214b42fc0494d0af6cb0"
     }
   ]
 }
