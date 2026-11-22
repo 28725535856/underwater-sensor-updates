@@ -1,0 +1,57 @@
+name: Publish standalone 1.1.4 restore APK
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/publish-restore-1.1.4-24.yml'
+permissions:
+  contents: write
+concurrency:
+  group: publish-sensor-1.1.7
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify and publish the restore APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/sensor-restore-1.1.4-24"
+          cd "$RUNNER_TEMP/sensor-restore-1.1.4-24"
+          python3 - <<'PY'
+          import os, pathlib, hashlib, json, base64, subprocess
+          repo = os.environ['GITHUB_REPOSITORY']
+
+          direct = 'https://raw.githubusercontent.com/' + repo + '/main/'
+          assets = [["underwater-sensor-1.1.4-restore.apk",5225441,"40cda52ef6f12e22c967c81d0d08bcef9fc0e10fd3bdccd62037551fd8d338be"],["restore.sud.gz",71725,"4cc31fdc93062d419798dc57c1b36340f30b313b64e6332d76b0029e5022a13e"]]
+          import gzip, struct, io
+          def download(url, dest):
+              subprocess.run(['curl','--fail','--location','--silent','--show-error','--retry','2','--max-time','180',url,'--output',dest],check=True)
+          download(direct+'packages/underwater-sensor-1.1.4.apk','base.apk')
+          download(direct+'packages/restore/1.1.4-cover-24.sud.gz','restore.sud.gz')
+          old=pathlib.Path('base.apk').read_bytes()
+          stream=io.BytesIO(gzip.decompress(pathlib.Path('restore.sud.gz').read_bytes()))
+          magic,oldsize,newsize=struct.unpack('>Iqq',stream.read(20));oldhash,newhash=stream.read(32),stream.read(32)
+          assert magic==0x53554431 and oldsize==len(old) and hashlib.sha256(old).digest()==oldhash and newsize<128*1024*1024
+          result=bytearray()
+          while True:
+              op=stream.read(1)
+              if op==b'\x7f':break
+              if op==b'\0':
+                  pos,n=struct.unpack('>qI',stream.read(12));assert pos>=0 and pos+n<=len(old);result+=old[pos:pos+n]
+              else:
+                  assert op==b'\1';n=struct.unpack('>I',stream.read(4))[0];result+=stream.read(n)
+              assert len(result)<=newsize
+          assert len(result)==newsize and hashlib.sha256(result).digest()==newhash
+          pathlib.Path('underwater-sensor-1.1.4-restore.apk').write_bytes(result)
+          for name,size,sha in assets:
+              data=pathlib.Path(name).read_bytes();assert len(data)==size and hashlib.sha256(data).hexdigest()==sha
+          subprocess.run(['gh','release','create','restore-1.1.4-24','underwater-sensor-1.1.4-restore.apk',
+              '--repo',repo,'--target',os.environ['GITHUB_SHA'],'--prerelease','--latest=false',
+              '--title','水下传感器 1.1.4 覆盖恢复包',
+              '--notes','复用 1.1.4 程序和资源。Android 安装编号为 24，可覆盖 1.1.7。'],check=True)
+          PY
